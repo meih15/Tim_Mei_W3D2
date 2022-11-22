@@ -1,4 +1,4 @@
-require "byebug"
+require 'byebug'
 require_relative "card"
 
 
@@ -12,20 +12,21 @@ class Board
 
     def initialize(card_num) #16
         @size = Math.sqrt(card_num) 
-        @grid = Array.new (@size){ Array.new (@size)}
+        @grid = Array.new (@size) { Array.new (@size)}
         @cards = []
         @card_num = card_num
     end
 
+    attr_reader :cards, :grid
 
     def make_cards
-        (0..@card_num/2).each do |ele|
+        (0...@card_num/2).each do |ele|
             @cards << [Card.new(ele, "face-down"), Card.new(ele, "face-down")]
         end 
     end 
     
     def populate
-        random_cards = @cards.shuffle
+        random_cards = @cards.flatten.shuffle
         i = 0 
         while i < @size * @size 
             @grid.each do |subArr| # [[], [], []]
@@ -68,13 +69,11 @@ class Board
     def won?
         @grid.each do |subArr|
             subArr.each { |ele| return false if ele.face == "face-down"} 
-            debugger
+           
         end
 
     true
     end 
-
-
 
 end
 
