@@ -4,17 +4,22 @@ require_relative "card"
 class Game
 
     def initialize
-        @board = Board.new()
+        @board = Board.new(16)
         @guessed_pos = []
         @previous_guess = []
     end
+
 
     def get_pos
         p "Please enter position"
         input = gets.chomp.split.map(&:to_i)
     end
 
+
     def play 
+    @board.make_cards
+    @board.populate
+    while @board.won? == false
         @board.render
         @guessed_pos = self.get_pos
 
@@ -28,6 +33,8 @@ class Game
             end
             @previous_guess = []
         end
+    end 
+    p 'Gameover, you win!'
     end
 
 end

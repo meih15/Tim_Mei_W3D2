@@ -1,13 +1,28 @@
-require_relative "Card"
+require "byebug"
+require_relative "card"
+
 
 class Board
+
+    # def self.make_cards
+    #     (0..card_num/2).each do |ele|
+    #         @cards << [Card.new(ele, "face-down"), Card.new(ele, "face-down")]
+    #     end 
+    # end 
 
     def initialize(card_num) #16
         @size = Math.sqrt(card_num) 
         @grid = Array.new (@size){ Array.new (@size)}
         @cards = []
+        @card_num = card_num
     end
 
+
+    def make_cards
+        (0..@card_num/2).each do |ele|
+            @cards << [Card.new(ele, "face-down"), Card.new(ele, "face-down")]
+        end 
+    end 
     
     def populate
         random_cards = @cards.shuffle
@@ -52,11 +67,11 @@ class Board
 
     def won?
         @grid.each do |subArr|
-
             subArr.each { |ele| return false if ele.face == "face-down"} 
+            debugger
         end
 
-        true
+    true
     end 
 
 
