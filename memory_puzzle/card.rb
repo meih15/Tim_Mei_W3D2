@@ -5,6 +5,10 @@ class Card
         @face = face
     end
 
+    def [](pos)
+        
+    end 
+
     def display_information
         # if @face == "face-up"
         #     return @value
@@ -18,8 +22,8 @@ class Card
         @face = "face-down"
     end
 
-    def reveal 
-        @face = "face-up"
+    def reveal(pos) 
+        if self[pos[0][pos[1]
     end
 
     
