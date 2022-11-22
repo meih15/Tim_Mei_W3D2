@@ -3,21 +3,18 @@ require_relative "card"
 
 class Board
 
-    # def self.make_cards
-    #     (0..card_num/2).each do |ele|
-    #         @cards << [Card.new(ele, "face-down"), Card.new(ele, "face-down")]
-    #     end 
-    # end 
+    attr_reader :cards, :grid, :hidden_grid, :size
+  
 
     def initialize(card_num) #16
         @size = Math.sqrt(card_num) 
-        @grid = Array.new (@size) { Array.new (@size)}
+        @grid = Array.new(size) { Array.new(size)}
         @cards = []
         @card_num = card_num
-        @hidden_grid = hidden = Array.new(@size){ Array.new (@size, :H) }
+        @hidden_grid = Array.new(size) { Array.new(size, :H) }
     end
 
-    attr_reader :cards, :grid, :hidden_grid
+   
 
     def make_cards
         (0...@card_num/2).each do |ele|
@@ -42,7 +39,7 @@ class Board
 
     def render
         @hidden_grid.each do |subarr|
-            print subarr
+            p subarr
         end 
     end 
 
@@ -59,7 +56,7 @@ class Board
 
     def reveal(pos) 
         if self[pos].face == "face-down"
-            self[pos].reveal
+            self[pos].reveal_card
             return self[pos].display_information
 
         end
@@ -79,3 +76,6 @@ class Board
 end
 
 
+# p b = Board.new(16)
+
+# p b.render

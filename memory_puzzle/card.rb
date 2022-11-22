@@ -5,7 +5,7 @@ class Card
         @face = face
     end
 
-    attr_reader :face
+    attr_reader :face, :value
 
  
     def display_information
@@ -18,7 +18,7 @@ class Card
         @face = "face-down"
     end
 
-    def reveal
+    def reveal_card
         @face = "face-up"
     end
 
