@@ -30,6 +30,10 @@ class Game
             pos2 = @previous_guess
             if @board.reveal(pos1) == @board.reveal(pos2)
                 @board[pos1].reveal && @board[pos2].reveal
+                @board.hidden_grid[pos1] =  @board[pos1].reveal && @board.hidden_grid[pos2] = @board[pos2].reveal
+                p 'You got a match!'
+            else  
+                p 'Try again'
             end
             @previous_guess = []
         end

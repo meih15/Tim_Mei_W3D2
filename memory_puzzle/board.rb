@@ -1,4 +1,3 @@
-require 'byebug'
 require_relative "card"
 
 
@@ -15,9 +14,10 @@ class Board
         @grid = Array.new (@size) { Array.new (@size)}
         @cards = []
         @card_num = card_num
+        @hidden_grid = hidden = Array.new(@size){ Array.new (@size, :H) }
     end
 
-    attr_reader :cards, :grid
+    attr_reader :cards, :grid, :hidden_grid
 
     def make_cards
         (0...@card_num/2).each do |ele|
@@ -29,9 +29,10 @@ class Board
         random_cards = @cards.flatten.shuffle
         i = 0 
         while i < @size * @size 
-            @grid.each do |subArr| # [[], [], []]
-                subArr.each do |ele|
-                    ele = random_cards[i]
+            @grid.each_with_index do |subArr, idx| # [[], [], []]
+                subArr.each_index do |idx2|
+                    pos = [idx, idx2]
+                    self[pos] = random_cards[i]
                     i += 1 
                 end 
             end
@@ -40,8 +41,8 @@ class Board
 
 
     def render
-        @grid.each do |subarr|
-            p subarr
+        @hidden_grid.each do |subarr|
+            print subarr
         end 
     end 
 
