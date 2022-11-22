@@ -29,10 +29,37 @@ class Board
         end 
     end 
 
+    def [](pos)
+        row, col = pos
+        @grid[row][col]
+    end 
+
+    def []=(pos, value)
+        row, col = pos
+        @grid[row][col] = value
+    end
+
+
+    def reveal(pos) 
+        if self[pos].face == "face-down"
+            self[pos].reveal
+            return self[pos].display_information
+
+        end
+     
+    end
+
 
     def won?
-        @cards.reveal
+        @grid.each do |subArr|
+
+            subArr.each { |ele| return false if ele.face == "face-down"} 
+        end
+
+        true
     end 
+
+
 
 end
 

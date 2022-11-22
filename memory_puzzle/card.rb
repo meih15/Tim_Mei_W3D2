@@ -5,27 +5,22 @@ class Card
         @face = face
     end
 
-    def [](pos)
-        
-    end 
+    attr_reader :face
 
+ 
     def display_information
-        # if @face == "face-up"
-        #     return @value
-        # end
-
-        @face
-        @value
+        if @face == "face-up"
+            return @value
+        end
     end
 
     def hide
         @face = "face-down"
     end
 
-    def reveal(pos) 
-        if self[pos[0][pos[1]
+    def reveal
+        @face = "face-up"
     end
 
-    
 
 end
